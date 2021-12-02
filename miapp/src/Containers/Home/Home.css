@@ -1,0 +1,45 @@
+.generalPedidos{
+    padding: 0 0 0 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.titulos{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 10em;
+
+}
+.nombresTitulos{
+    color: grey;
+    width: 10em;
+}
+.listadoPedidos{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    border-bottom:1em solid whitesmoke ;
+
+    width: 100vw;
+    height: 7em;
+}
+.lineaPedidos{
+    width: 12em;
+}
+
+/* BOTONES */
+.buttonDelete{
+    height: 1em;
+    width: 1em;
+}
+
+.buttonEdit{
+    height: 1em;
+    width: 1em;
+}
