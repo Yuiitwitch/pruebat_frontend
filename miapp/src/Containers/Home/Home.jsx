@@ -11,17 +11,36 @@ const Home = () => {
     const [pedidos,setPedidos] = useState([]);
     const [borradoPedidos, setborradoPedidos] = useState([]);
     const [editarPedidos, seteditoPedidos] = useState([]);
+    const [pagina, setPagina] = useState([]);
+    const [actual, setActual] = useState(0)
 
 
     useEffect(()=> {
         showOrder();
         deleteOrder();
         editOrder();
-    },[])
+    if(pedidos[1]){
+        pasarPagina(actual);
+    }
+    },[pedidos]);
 
     useEffect(()=> {
 
-    })
+    },[pagina])
+
+    const pasarPagina = (posicion) => {
+
+        let arrayPedidos = [] ;
+
+        for(let i = posicion; i < posicion+10; i ++){
+            arrayPedidos.push(pedidos[i]);
+        }
+
+        setPagina(arrayPedidos);
+
+        setActual(posicion);
+
+    }
     // funcion editar pedidos
     const editOrder = async (id) => {
 
@@ -59,9 +78,9 @@ const Home = () => {
         setPedidos(res.data);
     }
     //funcion para buscar pedidos
-    const buscador = async () => {
+    const filtrar = async () => {
         let input = document.getElementById("buscador").value;
-        let res = await axios.get("https://pruebatecnicaa.herokuapp.com/order/"+input)
+        let res = await axios.get(`https://pruebatecnicaa.herokuapp.com/order`+input)
 
         setPedidos(res.data);
     }
@@ -75,8 +94,8 @@ const Home = () => {
             <h3 className="nombresTitulos">STATUS</h3>
             <h3 className="nombresTitulos">TYPE</h3>
         </div>
-        <input id="buscador" placeholder ="Find Order"/>
-        <button onClick={() => buscador()}>Buscar</button>
+        <input id="buscador" placeholder = "Find Order"/>
+        <button onClick={() => filtrar()}>Buscar</button>
         
             <div>
             {pedidos.map((pedido)=>{
@@ -94,8 +113,13 @@ const Home = () => {
                     
                     </div>
                 )
+                
             })}
             </div>
+        <div>
+            {actual === 0 ? null : <div onClick={()=>pasarPagina(actual-10)}>ANTERIOR</div>}
+            {actual === pedidos.length - 5 ? null : <div onClick={()=>pasarPagina(actual+10)}>SIGUIENTE</div>}
+        </div>
             </div>
     )
 }
