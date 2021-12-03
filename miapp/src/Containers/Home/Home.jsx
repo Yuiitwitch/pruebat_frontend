@@ -23,7 +23,7 @@ const Home = () => {
 
     })
     // funcion editar pedidos
-    const editOrder = async () => {
+    const editOrder = async (id) => {
 
         let body = {
         country: editarPedidos.country,
@@ -35,7 +35,7 @@ const Home = () => {
 
 
 
-        let res = await axios.post(`https://pruebatecnicaa.herokuapp.com/order/${pedidos.id}`, body)
+        let res = await axios.put(`https://pruebatecnicaa.herokuapp.com/order/${id}`, body)
 
         seteditoPedidos(res.data);
     }
